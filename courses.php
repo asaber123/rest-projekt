@@ -27,19 +27,19 @@ if(isset($_GET['id'])) {
 
 
 //Skapar en instans av klassen för att skicka data till databasen, med databasen som parameter
-$course = new Courses();
+$course = new Course();
 
 switch($method) {
     case 'GET':
         if(isset($id)){
             $result = $course->getCourse($id);
             if(count($result)== 0){
-                $result = "Det finns inga kurser med id= $id att hämta";
+                $result = "There are no courses with id= $id to get";
             }
         } else{
             $result = $course->getCourses();
             if(count($result)== 0){
-                $result = "Det finns inga kurser att hämta";
+                $result = "There are no courses to get";
             }
         }
         break;
@@ -49,12 +49,12 @@ switch($method) {
         $data = json_decode(file_get_contents("php://input"));
     
 
-        if($course->addCourse($data->code, $data->name, $data->progression, $data->link)){
-            $result = "Kursen är skapad";
+        if($course->addCourse($data->name, $data->link, $data->description)){
+            $result = "Course added";
             http_response_code(201); 
 
         } else {
-            $result = "kursen är inte skapad, du måste fylla i alla värden";
+            $result = "course is not created, all values must be set";
             http_response_code(503);
         }
 
@@ -64,32 +64,31 @@ switch($method) {
         //Om inget id är med skickat, skickas felmeddelande
         if(!isset($id)) {
             http_response_code(510); 
-            $response = "Det saknas ett id för att uppdatera kursen";
+            $response = "Id is missing";
         //Om id är skickad   
         } else {
             $data = json_decode(file_get_contents("php://input"));
             //deklarerar in värde till klassens properties
-            $code = $data->code;
             $name = $data->name;
-            $progression = $data->progression;
             $link = $data->link;
+            $description = $data->description;
 
-        if($course->updateCourse($id, $code, $name, $progression, $link))
+        if($course->updateCourse($id, $name, $link, $description))
             http_response_code(200);
-            $result = "Kurs med id=$id är uppdaterad";
+            $result = "Course with=$id is updated";
             }
         break;
         //Delete funktion som tar bort objekten med ett visst id.
     case 'DELETE':
         //Om inget id skickas, returneras textsträngen
         if(!isset($id)) {
-            $result = "Det saknas ett id för att kunna ta bort kursen";  
+            $result = "An id is missing";  
         } 
         elseif($course->deleteCourse($id)) {
-            $result = "Kursen med id=$id är botttagen";
+            $result = "Course with id=$id is deleted";
         }
         else {
-            $result = "Något gick fel, det gick inte att ta bort kursen";
+            $result = "Error, something went wrong";
         }
         break;
         
