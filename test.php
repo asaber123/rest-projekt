@@ -11,9 +11,9 @@ $w = new Workplace;
 
 //var_dump($c->updateCourse(2, "222", "222", "222", "22"));
 
-// echo "<pre>";
-// var_dump($c->getCourses());
-// echo "</pre>";
+echo "<pre>";
+var_dump($c->getCourses());
+echo "</pre>";
 
 
 //var_dump($p->addProject("test", "test", "test"));
@@ -23,9 +23,9 @@ $w = new Workplace;
 
 //var_dump($p->updateProject(2, "222", "222", "222", "22"));
 
-// echo "<pre>";
-// var_dump($p->getProjects());
-// echo "</pre>";
+echo "<pre>";
+var_dump($p->getProjects());
+echo "</pre>";
 
 //var_dump($w->addWorkplace("test", "test", "test", "test"));
 //var_dump($w->getWorkplace(1));
