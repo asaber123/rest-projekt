@@ -47,31 +47,29 @@ class Projects{
         }
     }    
     
-//     //Uppdaterar värdet från en kurs med id
-//     function updateCourse($id, $code, $name, $progression, $link){
-//         if (strlen($code) > 1 || strlen($name) > 1 || strlen($progression) > 0 || strlen($link) > 1){
+    //Uppdaterar värdet från en kurs med id
+    function updateProject($id, $name, $description, $link){
+        if (strlen($name) > 1 || strlen($description) > 1 || strlen($link)> 1 ){
+        $this->name = $name;
+        $this->description = $description;
+        $this->link = $link;
+        $id = intval($id);
+        $sql = "UPDATE projects_portfolio SET name= '$name', description= '$description', link= '$link'  WHERE id= $id;";
+        return mysqli_query($this->db, $sql);
+    }else{
+        return false;
+    }
+    }
 
-//         $this->code = $code;
-//         $this->name = $name;
-//         $this->progression = $progression;
-//         $this->link = $link;
-//         $id = intval($id);
-//         $sql = "UPDATE courses SET code= '$code', name= '$name', progression= '$progression', link ='$link'  WHERE id= $id;";
-//         return mysqli_query($this->db, $sql);
-//     }else{
-//         return false;
-//     }
-//     }
+    //Tar bort kurs med id
+    function deleteProject($id):bool{
+        $sql = "DELETE FROM projects_portfolio WHERE id=$id;";
 
-//     //Tar bort kurs med id
-//     function deleteCourse($id):bool{
-//         $sql = "DELETE FROM courses WHERE id=$id;";
-
-//         $result= $this->db->query($sql);
-//         return $result;
-//     }
-//     function close(){
-//         $this->db = null; 
-//     }
+        $result= $this->db->query($sql);
+        return $result;
+    }
+    function close(){
+        $this->db = null; 
+    }
 
 }

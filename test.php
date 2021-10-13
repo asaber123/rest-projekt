@@ -16,12 +16,12 @@ $p = new Projects;
 // echo "</pre>";
 
 
-//var_dump($c->addProject("test", "test", "test"));
-//var_dump($c->getProject(6));
+//var_dump($p->addProject("test", "test", "test"));
+//var_dump($p->getProject(6));
 
-//$c->deleteProject(2);
+$p->deleteProject(2);
 
-//var_dump($c->updateProject(2, "222", "222", "222", "22"));
+//var_dump($p->updateProject(2, "222", "222", "222", "22"));
 
 echo "<pre>";
 var_dump($p->getProjects());
