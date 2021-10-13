@@ -1,5 +1,5 @@
 <?php
- class Courses{
+ class Course{
     private $db;
     private $id;
     private $code;

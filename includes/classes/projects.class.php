@@ -1,5 +1,5 @@
 <?php
-class Projects{
+class Project{
     private $db;
     private $id;
     private $name;

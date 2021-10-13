@@ -19,7 +19,6 @@ $sql .= "CREATE TABLE workplaces_portfolio(
     date VARCHAR(32) NOT NULL UNIQUE,
     text VARCHAR(150) NOT NULL
 );";
-//lite test data
 $sql .="INSERT INTO workplaces_portfolio(id, name,description, date, text) VALUES (1, 'Aptiv', 'Summer student internship', '2021/04/01 - 2021/09/20', 'Texttext');";
 
 /* If success, print print pre tag else warning */
