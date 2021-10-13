@@ -27,21 +27,21 @@ if(isset($_GET['id'])) {
 
 
 //Creates an instance of the class. 
-$course = new Course();
+$project = new Project();
 
 //Making switch depending on what method is used. 
 switch($method) {
     //In case of get method
     case 'GET':
-        //If an id is sent, it will go to the function "getCourse" in the class
+        //If an id is sent, it will go to the function "getProject" in the class
         if(isset($id)){
-            $result = $course->getCourse($id);
+            $result = $project->getProject($id);
             if(count($result)== 0){
-                $result = "There are no courses with id= $id to get";
+                $result = "There are no project with id= $id to get";
             }
-        //If an id is not sent in, the data will be sent to the function "getCourses" in the class. 
+        //If an id is not sent in, the data will be sent to the function "getProjects" in the class. 
         } else{
-            $result = $course->getCourses();
+            $result = $project->getProjects();
             if(count($result)== 0){
                 $result = "There are no courses to get";
             }
@@ -52,13 +52,13 @@ switch($method) {
         //Reads the JSON data and transform it into an object. 
         $data = json_decode(file_get_contents("php://input"));
     
-        //If all data has been sent in, the data is sent to the function "addCourse" in the class. 
-        if($course->addCourse($data->name, $data->link, $data->description)){
-            $result = "Course added";
+        //If all data has been sent in, the data is sent to the function "addProject" in the class. 
+        if($project->addProject($data->name, $data->link, $data->description)){
+            $result = "Project added";
             http_response_code(201); 
         //If the data was not sent or something else went wrong, error message will be displayed. 
         } else {
-            $result = "course is not created, all values must be set";
+            $result = "Project is not added, all values must be set";
             http_response_code(503);
         }
 
@@ -74,12 +74,13 @@ switch($method) {
             $data = json_decode(file_get_contents("php://input"));
             //setting variables
             $name = $data->name;
-            $link = $data->link;
             $description = $data->description;
-            //If data has been sent in, the data is sent to the function "updateCourse" in the class
-        if($course->updateCourse($id, $name, $link, $description))
+            $link = $data->link;
+            
+            //If data has been sent in, the data is sent to the function "updateProject" in the class
+        if($project->updateProject($id, $name, $description, $link))
             http_response_code(200);
-            $result = "Course with=$id is updated";
+            $result = "Project with=$id is updated";
             }
         break;
         //If the method is delete:
@@ -87,9 +88,9 @@ switch($method) {
         //If no id is sent with the request, an error message is shown. 
         if(!isset($id)) {
             $result = "An id is missing";  
-        } //If an id is sent, data will be sent to "deleteCourse" in the class function. 
-        elseif($course->deleteCourse($id)) {
-            $result = "Course with id=$id is deleted";
+        } //If an id is sent, data will be sent to "deleteProject" in the class function. 
+        elseif($project->deleteProject($id)) {
+            $result = "Project with id=$id is deleted";
         }
         //If none of above, a different error message will be shown. 
         else {
