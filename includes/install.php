@@ -14,7 +14,8 @@ if ($db->connect_errno > 0) {
 $sql ="DROP TABLE IF EXISTS courses_portfolio;";
 $sql .= "CREATE TABLE courses_portfolio(
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(32) NOT NULL,
+    university VARCHAR(62) NOT NULL,
+    name VARCHAR(62) NOT NULL,
     link VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL
 );";
@@ -37,7 +38,7 @@ $sql .= "CREATE TABLE projects_portfolio(
 );";
 //Adding some test data
 $sql .="INSERT INTO workplaces_portfolio(id, name,description, date, text) VALUES (1, 'Aptiv', 'Summer student internship', '2021/04/01 - 2021/09/20', 'Texttext');";
-$sql .="INSERT INTO courses_portfolio(id, name, link, description) VALUES (1, 'Webbutveckling III', 'https://www.miun.se/utbildning/kurser/Sok-kursplan/kursplan/?kursplanid=21873', 'Grunderna i JavaScript, HTML & CSS');";
+$sql .="INSERT INTO courses_portfolio(id, name, link, description, university) VALUES (1, 'Webbutveckling III', 'https://www.miun.se/utbildning/kurser/Sok-kursplan/kursplan/?kursplanid=21873', 'Grunderna i JavaScript, HTML & CSS', 'Mittuniversitetet');";
 $sql .="INSERT INTO projects_portfolio(id, name, description, link) VALUES (1, 'Make an impact', 'Bloggportal med php', 'http://asaberglund.se/impact/');";
 
 

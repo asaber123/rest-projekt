@@ -1,11 +1,10 @@
 <?php
  class Course{
     private $db;
-    private $id;
-    private $code;
     private $name;
     private $description;
     private $link;
+    private $university;
 
     //constructorsom körs direkt i klassen
     function __construct()
@@ -36,12 +35,13 @@
         }
     }
     //Lägger till ny kurs. Returnerar true om det blir en lyckad lagring, annars returneras false
-    function addCourse($name, $link, $description): bool{
-        if (strlen($name) > 1 || strlen($link) > 1 || strlen($description) > 1){
-            $this->name = $name;
-            $this->link = $link;
-            $this->description = $description;
-            $sql = "INSERT INTO courses_portfolio(name, link, description)VALUES('$this->name','$this->link', '$this->description');";
+    function addCourse($name, $link, $description, $university): bool{
+        if (strlen($name) > 0 || strlen($link) > 0 || strlen($description) > 0 || strlen($university) > 0 ){
+            $this->name = mysqli_real_escape_string($this->db, $name);
+            $this->link = mysqli_real_escape_string($this->db, $link);
+            $this->description = mysqli_real_escape_string($this->db, $description);
+            $this->university = mysqli_real_escape_string($this->db, $university);
+            $sql = "INSERT INTO courses_portfolio(name, link, description, university)VALUES('$this->name','$this->link', '$this->description', '$this->university');";
             return mysqli_query($this->db, $sql);
         } else {
             return false;
@@ -49,14 +49,15 @@
     }    
     
     //Uppdaterar värdet från en kurs med id
-    function updateCourse($id, $name, $link, $description){
-        if (strlen($name) > 1 || strlen($link) > 1 || strlen($description) > 1){
+    function updateCourse($id, $name, $link, $description, $university){
+        if (strlen($name) > 0 || strlen($link) > 0 || strlen($description) > 0|| strlen($university) > 0 ){
 
-        $this->name = $name;
-        $this->link = $link;
-        $this->description = $description;
+        $this->name = mysqli_real_escape_string($this->db, $name);
+        $this->link = mysqli_real_escape_string($this->db, $link);
+        $this->description = mysqli_real_escape_string($this->db, $description);
+        $this->university = mysqli_real_escape_string($this->db, $university);
         $id = intval($id);
-        $sql = "UPDATE courses_portfolio SET name= '$name', link= '$link', description= '$description'  WHERE id= $id;";
+        $sql = "UPDATE courses_portfolio SET name= '$name', link= '$link', description= '$description', university= '$university'  WHERE id= $id;";
         return mysqli_query($this->db, $sql);
     }else{
         return false;

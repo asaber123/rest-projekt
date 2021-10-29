@@ -34,11 +34,11 @@ class Workplace{
     }
     //Lägger till ny kurs. Returnerar true om det blir en lyckad lagring, annars returneras false
     function addWorkplace($name, $description, $date, $text): bool{
-        if (strlen($name) > 1 || strlen($description) > 1 || strlen($date) > 0 || strlen($text) > 1){
-            $this->name = $name;
-            $this->description = $description;
-            $this->date = $date;
-            $this->text = $text;
+        if (strlen($name) > 0 || strlen($description) > 0 || strlen($date) > 0 || strlen($text) > 0){
+            $this->name = mysqli_real_escape_string($this->db, $name);
+            $this->description = mysqli_real_escape_string($this->db, $description);
+            $this->date = mysqli_real_escape_string($this->db, $date);
+            $this->text = mysqli_real_escape_string($this->db, $text);
             $sql = "INSERT INTO workplaces_portfolio(name, description, date, text)VALUES('$this->name','$this->description', '$this->date', '$this->text');";
             return mysqli_query($this->db, $sql);
         } else {
@@ -48,7 +48,7 @@ class Workplace{
     
     //Uppdaterar värdet från en kurs med id
     function updateWorkplace($id, $name, $description, $date, $text){
-        if (strlen($name) > 1 || strlen($description) > 1 || strlen($date) > 0 || strlen($text) > 1){
+        if (strlen($name) > 0 || strlen($description) > 0 || strlen($date) > 0 || strlen($text) > 0){
 
         $this->name = $name;
         $this->description = $description;

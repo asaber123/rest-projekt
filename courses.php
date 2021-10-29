@@ -53,12 +53,12 @@ switch($method) {
         $data = json_decode(file_get_contents("php://input"));
     
         //If all data has been sent in, the data is sent to the function "addCourse" in the class. 
-        if($course->addCourse($data->name, $data->link, $data->description)){
+        if($course->addCourse($data->name, $data->link, $data->description, $data->university)){
             $result = "Course added";
             http_response_code(201); 
         //If the data was not sent or something else went wrong, error message will be displayed. 
         } else {
-            $result = "course is not created, all values must be set";
+            $result = "course is not created, all values must be set and must have a value over 1 string";
             http_response_code(503);
         }
 
@@ -76,8 +76,9 @@ switch($method) {
             $name = $data->name;
             $link = $data->link;
             $description = $data->description;
+            $university = $data->university;
             //If data has been sent in, the data is sent to the function "updateCourse" in the class
-        if($course->updateCourse($id, $name, $link, $description))
+        if($course->updateCourse($id, $name, $link, $description, $university))
             http_response_code(200);
             $result = "Course with=$id is updated";
             }

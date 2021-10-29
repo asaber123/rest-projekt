@@ -36,10 +36,10 @@ class Project{
     }
     //Lägger till ny kurs. Returnerar true om det blir en lyckad lagring, annars returneras false
     function addProject($name, $description, $link): bool{
-        if (strlen($name) > 1 || strlen($description) > 1 || strlen($link)> 1 ){
-            $this->name = $name;
-            $this->description = $description;
-            $this->link = $link;
+        if (strlen($name) > 0 || strlen($description) > 0 || strlen($link)> 0 ){
+            $this->name = mysqli_real_escape_string($this->db, $name);
+            $this->description = mysqli_real_escape_string($this->db, $description);
+            $this->link = mysqli_real_escape_string($this->db, $link);
             $sql = "INSERT INTO projects_portfolio(name, description, link)VALUES('$this->name','$this->description', '$this->link');";
             return mysqli_query($this->db, $sql);
         } else {
@@ -49,10 +49,10 @@ class Project{
     
     //Uppdaterar värdet från en kurs med id
     function updateProject($id, $name, $description, $link){
-        if (strlen($name) > 1 || strlen($description) > 1 || strlen($link)> 1 ){
-        $this->name = $name;
-        $this->description = $description;
-        $this->link = $link;
+        if (strlen($name) > 0 || strlen($description) > 0 || strlen($link)> 0 ){
+        $this->name = mysqli_real_escape_string($this->db, $name);
+        $this->description = mysqli_real_escape_string($this->db, $description);
+        $this->link = mysqli_real_escape_string($this->db, $link);
         $id = intval($id);
         $sql = "UPDATE projects_portfolio SET name= '$name', description= '$description', link= '$link'  WHERE id= $id;";
         return mysqli_query($this->db, $sql);
