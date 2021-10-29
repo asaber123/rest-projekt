@@ -19,7 +19,7 @@ $sql .= "CREATE TABLE courses_portfolio(
     description VARCHAR(255) NOT NULL
 );";
 //creating tables for workplaces
-$sql ="DROP TABLE IF EXISTS workplaces_portfolio;";
+$sql .="DROP TABLE IF EXISTS workplaces_portfolio;";
 $sql .= "CREATE TABLE workplaces_portfolio(
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL,
@@ -28,7 +28,7 @@ $sql .= "CREATE TABLE workplaces_portfolio(
     text VARCHAR(150) NOT NULL
 );";
 //Creating tables for projects
-$sql ="DROP TABLE IF EXISTS projects_portfolio;";
+$sql .="DROP TABLE IF EXISTS projects_portfolio;";
 $sql .= "CREATE TABLE projects_portfolio(
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL,
