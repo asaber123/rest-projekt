@@ -37,9 +37,16 @@ class Project{
     //Lägger till ny kurs. Returnerar true om det blir en lyckad lagring, annars returneras false
     function addProject($name, $description, $link): bool{
         if (strlen($name) > 0 || strlen($description) > 0 || strlen($link)> 0 ){
-            $this->name = mysqli_real_escape_string($this->db, $name);
-            $this->description = mysqli_real_escape_string($this->db, $description);
-            $this->link = mysqli_real_escape_string($this->db, $link);
+            //Making sure that the inputs are safe and won't create any html, css tags or script code. 
+            $safeName = htmlspecialchars($name);
+            $safeDescription= htmlspecialchars($description);
+            $safeLink= htmlspecialchars($link);
+
+
+            //Setting variables and using real escape function to be sure that the database see the input as text and not as sql code. 
+            $this->name = mysqli_real_escape_string($this->db, $safeName);
+            $this->description = mysqli_real_escape_string($this->db, $safeDescription);
+            $this->link = mysqli_real_escape_string($this->db, $safeLink);
             $sql = "INSERT INTO projects_portfolio(name, description, link)VALUES('$this->name','$this->description', '$this->link');";
             return mysqli_query($this->db, $sql);
         } else {
@@ -50,6 +57,7 @@ class Project{
     //Uppdaterar värdet från en kurs med id
     function updateProject($id, $name, $description, $link){
         if (strlen($name) > 0 || strlen($description) > 0 || strlen($link)> 0 ){
+        //Setting variables and using real escape function to be sure that the database see the input as text and not as sql code. 
         $this->name = mysqli_real_escape_string($this->db, $name);
         $this->description = mysqli_real_escape_string($this->db, $description);
         $this->link = mysqli_real_escape_string($this->db, $link);
