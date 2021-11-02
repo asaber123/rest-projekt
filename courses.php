@@ -37,13 +37,13 @@ switch($method) {
         if(isset($id)){
             $result = $course->getCourse($id);
             if(count($result)== 0){
-                $result = "There are no courses with id= $id to get";
+                $result = "Det finns ingen kurs med id= $id att hämta";
             }
         //If an id is not sent in, the data will be sent to the function "getCourses" in the class. 
         } else{
             $result = $course->getCourses();
             if(count($result)== 0){
-                $result = "There are no courses to get";
+                $result = "Det finns inga kurser att hämta";
             }
         }
         break;
@@ -58,7 +58,7 @@ switch($method) {
             http_response_code(201); 
         //If the data was not sent or something else went wrong, error message will be displayed. 
         } else {
-            $result = "course is not created, all values must be set and must have a value over 1 string";
+            $result = "Det gick inte att lägga till kursen, alla värden måste vara ifyllda.";
             http_response_code(503);
         }
 
@@ -80,21 +80,21 @@ switch($method) {
             //If data has been sent in, the data is sent to the function "updateCourse" in the class
         if($course->updateCourse($id, $name, $link, $description, $university))
             http_response_code(200);
-            $result = "Course with=$id is updated";
+            $result = "Kurs med id=$id är uppdaterad";
             }
         break;
         //If the method is delete:
     case 'DELETE':
         //If no id is sent with the request, an error message is shown. 
         if(!isset($id)) {
-            $result = "An id is missing";  
+            $result = "Id saknas";  
         } //If an id is sent, data will be sent to "deleteCourse" in the class function. 
         elseif($course->deleteCourse($id)) {
-            $result = "Course with id=$id is deleted";
+            $result = "Kurs med id=$id är borttaget";
         }
         //If none of above, a different error message will be shown. 
         else {
-            $result = "Error, something went wrong";
+            $result = "Varning, någonting gick fel.";
         }
         break;
         

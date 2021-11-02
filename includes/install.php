@@ -34,8 +34,8 @@ $sql .= "CREATE TABLE projects_portfolio(
     id INT(10) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(32) NOT NULL,
     description VARCHAR(32) NOT NULL,
-    link VARCHAR(32) NOT NULL
-);";
+    link VARCHAR(32) NOT NULL,
+    );";
 //Adding some test data
 $sql .="INSERT INTO workplaces_portfolio(id, name,description, date, text) VALUES (1, 'Aptiv', 'Summer student internship', '2021/04/01 - 2021/09/20', 'Texttext');";
 $sql .="INSERT INTO courses_portfolio(id, name, link, description, university) VALUES (1, 'Webbutveckling III', 'https://www.miun.se/utbildning/kurser/Sok-kursplan/kursplan/?kursplanid=21873', 'Grunderna i JavaScript, HTML & CSS', 'Mittuniversitetet');";
@@ -44,7 +44,7 @@ $sql .="INSERT INTO projects_portfolio(id, name, description, link) VALUES (1, '
 
 /* If success, print print pre tag else warning */
 if($db->multi_query($sql)) {
-    echo "Tables are installed!";
+    echo "Tabellerna är installerade!";
 } else {
-    echo "Something happend, tables are not installed!";
+    echo "Något hände, det gick inte att installera tabellerna!";
 }

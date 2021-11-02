@@ -37,13 +37,13 @@ switch($method) {
         if(isset($id)){
             $result = $project->getProject($id);
             if(count($result)== 0){
-                $result = "There are no project with id= $id to get";
+                $result = "Det finns inget projekt med id= $id att hämta";
             }
         //If an id is not sent in, the data will be sent to the function "getProjects" in the class. 
         } else{
             $result = $project->getProjects();
             if(count($result)== 0){
-                $result = "There are no courses to get";
+                $result = "Det finns inga projekt att hämta";
             }
         }
         break;
@@ -54,11 +54,11 @@ switch($method) {
     
         //If all data has been sent in, the data is sent to the function "addProject" in the class. 
         if($project->addProject($data->name, $data->link, $data->description)){
-            $result = "Project added";
+            $result = "Projekt tillagt";
             http_response_code(201); 
         //If the data was not sent or something else went wrong, error message will be displayed. 
         } else {
-            $result = "Project is not added, all values must be set";
+            $result = "Projektet gick inte att lägga till, alla värden måste vara ifyllda";
             http_response_code(503);
         }
 
@@ -68,7 +68,7 @@ switch($method) {
         //If no id is sent an error message will be shown. 
         if(!isset($id)) {
             http_response_code(510); 
-            $response = "Id is missing";
+            $response = "Id saknas";
         //If id is sent it will transform the JSON input and make it into an object.   
         } else {
             $data = json_decode(file_get_contents("php://input"));
@@ -80,21 +80,21 @@ switch($method) {
             //If data has been sent in, the data is sent to the function "updateProject" in the class
         if($project->updateProject($id, $name, $description, $link))
             http_response_code(200);
-            $result = "Project with=$id is updated";
+            $result = "Projekt med id=$id är uppdaterat";
             }
         break;
         //If the method is delete:
     case 'DELETE':
         //If no id is sent with the request, an error message is shown. 
         if(!isset($id)) {
-            $result = "An id is missing";  
+            $result = "Ett id saknas";  
         } //If an id is sent, data will be sent to "deleteProject" in the class function. 
         elseif($project->deleteProject($id)) {
-            $result = "Project with id=$id is deleted";
+            $result = "Projektet med id=$id är borttagen";
         }
         //If none of above, a different error message will be shown. 
         else {
-            $result = "Error, something went wrong";
+            $result = "Varning, något gick fel";
         }
         break;
         

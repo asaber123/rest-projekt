@@ -37,13 +37,13 @@ switch($method) {
         if(isset($id)){
             $result = $workplace->getWorkplace($id);
             if(count($result)== 0){
-                $result = "There are no workplace with id= $id to get";
+                $result = "Det finns inga arbetsplatser med id= $id att hämta";
             }
         //If an id is not sent in, the data will be sent to the function "getWorkplaces" in the class. 
         } else{
             $result = $workplace->getWorkplaces();
             if(count($result)== 0){
-                $result = "There are no workplaces to get";
+                $result = "Det finns inga arbetsplatser att hämta";
             }
         }
         break;
@@ -53,11 +53,11 @@ switch($method) {
         $data = json_decode(file_get_contents("php://input"));
         //If all data has been sent in, the data is sent to the function "addProject" in the class. 
         if($workplace->addWorkplace($data->name, $data->description, $data->date, $data->text)){
-            $result = "Workplace added";
+            $result = "Arbets-erfarenhet tillagd";
             http_response_code(201); 
         //If the data was not sent or something else went wrong, error message will be displayed. 
         } else {
-            $result = "Workplace is not added, all values must be set";
+            $result = "Arbetserfarenheten är inte tillagd, alla värden måste vara ifyllda";
             http_response_code(503);
         }
 
@@ -67,7 +67,7 @@ switch($method) {
         //If no id is sent an error message will be shown. 
         if(!isset($id)) {
             http_response_code(510); 
-            $response = "Id is missing";
+            $response = "Id saknas";
         //If id is sent it will transform the JSON input and make it into an object.   
         } else {
             $data = json_decode(file_get_contents("php://input"));
@@ -80,21 +80,21 @@ switch($method) {
             //If data has been sent in, the data is sent to the function "updateProject" in the class
         if($workplace-> updateWorkplace($id, $name, $description, $date, $text))
             http_response_code(200);
-            $result = "Workplace with=$id is updated";
+            $result = "Arbetserfarenhet med id=$id är uppdaterat";
             }
         break;
         //If the method is delete:
     case 'DELETE':
         //If no id is sent with the request, an error message is shown. 
         if(!isset($id)) {
-            $result = "An id is missing";  
+            $result = "Id saknas";  
         } //If an id is sent, data will be sent to "deleteProject" in the class function. 
         elseif($workplace->deleteWorkplace($id)) {
-            $result = "Workplace with id=$id is deleted";
+            $result = "Arbetserfarenhet med id=$id är borttaget";
         }
         //If none of above, a different error message will be shown. 
         else {
-            $result = "Error, something went wrong";
+            $result = "Varning, något gick fel";
         }
         break;
         

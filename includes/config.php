@@ -8,14 +8,14 @@ include 'classes/projects.class.php';
 
 
 if($devmode){
-    //DB localhost
+    //Database connection for localhost
     define("DBHOST", "localhost");
     define("DBUSER", "rest_api_projekt");
     define("DBPASS", "password");
     define("DBDATABASE", "rest_api_projekt");
 }
     else {
-        //DB mysql simply.com
+        //Database connection for mysql simply.com
         define("DBHOST", "mysql112.unoeuro.com");
         define("DBUSER", "asaberglund_se");
         define("DBPASS", "livetpaenpinne2021");
