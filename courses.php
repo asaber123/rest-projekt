@@ -17,6 +17,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 $method = $_SERVER['REQUEST_METHOD'];
 
 require 'includes/config.php';
+include 'classes/courses.class.php';
 
 
 // If a parameter is an id, the variable is set as the id. 

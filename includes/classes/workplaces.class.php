@@ -1,7 +1,6 @@
 <?php
 class Workplace{
     private $db;
-    private $id;
     private $name;
     private $description;
     private $date;

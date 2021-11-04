@@ -1,6 +1,6 @@
 <?php
 // Made by Åsa Berglund 2021
-$devmode= true;
+$devmode= false;
 
 include 'classes/courses.class.php';
 include 'classes/workplaces.class.php';
